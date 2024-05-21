@@ -1,0 +1,19 @@
+{
+  "name": "context-dependency-injector",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "node --import tsx --test src/*.test.ts",
+    "test:watch": "node --watch --import tsx --test src/*.test.ts",
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.12",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.10.2",
+    "typescript": "^5.2.2",
+    "vite": "^5.2.0",
+    "vite-plugin-dts": "^3.9.1"
+  }
+}
