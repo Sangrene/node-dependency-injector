@@ -4,7 +4,8 @@ const asyncLocalStorage = new AsyncLocalStorage<Record<string, any>>();
 
 export function useInjectedContext<C>(id: string): C {
   const store = asyncLocalStorage.getStore();
-  if (!store) throw new Error(`No context associated with id ${id}`);
+  if (!store) throw new Error(`No store available in the async flow. injectIn need to be used upward in the call stack.`);
+  if(!store[id]) throw new Error(`No context associated with id ${id}`);
   return store[id] as C;
 }
 

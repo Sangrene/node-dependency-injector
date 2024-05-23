@@ -6,11 +6,12 @@
   "scripts": {
     "test": "node --import tsx --test src/*.test.ts",
     "test:watch": "node --watch --import tsx --test src/*.test.ts",
-    "build": "vite build"
+    "build": "tsup src/main.ts --dts --format esm,cjs --minify"
   },
   "devDependencies": {
     "@types/node": "^20.12.12",
     "ts-node": "^10.9.2",
+    "tsup": "^8.0.2",
     "tsx": "^4.10.2",
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
