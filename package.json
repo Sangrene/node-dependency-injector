@@ -13,8 +13,6 @@
     "ts-node": "^10.9.2",
     "tsup": "^8.0.2",
     "tsx": "^4.10.2",
-    "typescript": "^5.2.2",
-    "vite": "^5.2.0",
-    "vite-plugin-dts": "^3.9.1"
+    "typescript": "^5.2.2"
   }
 }
