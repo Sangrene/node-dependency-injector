@@ -74,6 +74,47 @@ describe("Context dependency injector", () => {
     assert.deepEqual(method(), {
       foo: "bar",
       child: "childFoo",
-    })
+    });
+  });
+
+  test("It maintains context state", () => {
+    type Context = {
+      getVal(key: string): string;
+      setVal(key: string, val: any): void;
+    };
+    const createContext = () => {
+      const state: Record<string, any> = {
+        foo: "bar",
+      };
+
+      return {
+        getVal: (key: string) => state[key],
+        setVal: (key: string, val: any) => {
+          state[key] = val;
+        },
+      };
+    };
+    const createService1 = () => {
+      const context = useInjectedContext<Context>("context");
+
+      return {
+        setVal: () => context.setVal("foo", "babar"),
+      };
+    };
+    const createService2 = () => {
+      const context = useInjectedContext<Context>("context");
+      return {
+        getVal: () => context.getVal("foo"),
+      };
+    };
+    const main = () => {
+      const service1 = createService1();
+      service1.setVal();
+      const service2 = createService2();
+      return service2.getVal();
+    };
+
+    const method = injectIn("context", main, createContext());
+    assert.strictEqual(method(), "babar");
   });
 });
